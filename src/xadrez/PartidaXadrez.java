@@ -1,4 +1,4 @@
-package xadrez;
+ package xadrez;
 
 import tabuleiro.Peca;
 import tabuleiro.Posicao;
@@ -36,17 +36,18 @@ public class PartidaXadrez {
 		return (PecaXadrez) pecaCapturada;
 	}
 	
-	private void validarPosicaoOrigem(Posicao posicao) {
-		if (!tabuleiro.aquiHaUmaPeca(posicao)) {
-			throw new ExecaoXadrez("Não há peça na posição de origem.");
-		}
-	}
-	
-	private Peca fazerMovimento (Posicao origem, Posicao destino) {
+	private Peca fazerMovimento(Posicao origem, Posicao destino) {
 		Peca p = tabuleiro.removerPeca(origem);
 		Peca pecaCapturada = tabuleiro.removerPeca(destino);
 		tabuleiro.AlocarPeca(p, destino);
 		return pecaCapturada;
+	}
+	
+	
+	private void validarPosicaoOrigem(Posicao posicao) {
+		if (!tabuleiro.aquiHaUmaPeca(posicao)) {
+			throw new ExecaoXadrez("Não há peça na posição de origem.");
+		}
 	}
 	
 	private void alocarNovaPeca(char coluna, int linha, PecaXadrez peca) {

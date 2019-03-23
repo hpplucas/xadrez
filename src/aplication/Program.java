@@ -1,13 +1,32 @@
 package aplication;
 
+import java.util.Scanner;
+
 import xadrez.PartidaXadrez;
+import xadrez.PecaXadrez;
+import xadrez.PosicaoXadrez;
 
 public class Program {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		Scanner sc = new Scanner(System.in);
+		
 		PartidaXadrez partida = new PartidaXadrez();
-		UI.MostrarTabuleiro(partida.getPecas());
+
+		while (true) {
+			UI.MostrarTabuleiro(partida.getPecas());
+			System.out.println();
+			System.out.print("Origem: ");
+			PosicaoXadrez origem = UI.lerPosicaoXadrez(sc);
+			
+			System.out.println();
+			System.out.println("Destino: ");
+			PosicaoXadrez destino = UI.lerPosicaoXadrez(sc);
+			
+			PecaXadrez pecaCapturada = partida.fazerMovimentoXadrez(origem, destino);
+		}
+		
 	}
 
 }

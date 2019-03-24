@@ -63,10 +63,17 @@ public class UI {
 		mostrarPecasCapturadas(capturadas);
 		System.out.println();
 		System.out.println("Turno: "+ partida.getTurno());
+		
+		if (!partida.getCheckMate()) {
+		
 		System.out.println("Esperando jogador: "+partida.getJogadorAtual());
 		
 		if (partida.getCheck()) {
 			System.out.println("CHECK!");
+		}
+		} else {
+			System.out.println("CHECKMATE!");
+			System.out.println("Vencedor: jogador "+partida.getJogadorAtual());
 		}
 	}
 	

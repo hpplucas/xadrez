@@ -1,6 +1,7 @@
  package xadrez;
 
-import java.util.concurrent.ExecutionException;
+import java.util.ArrayList;
+import java.util.List;
 
 import tabuleiro.Peca;
 import tabuleiro.Posicao;
@@ -13,6 +14,9 @@ public class PartidaXadrez {
 	private int turno;
 	private Cor jogadorAtual;
 	private Tabuleiro tabuleiro;
+	
+	private List<Peca> pecasNoTabuleiro = new ArrayList<>(); 
+	private List<Peca> pecasCapturadas = new ArrayList<>();
 	
 	public PartidaXadrez() {
 		tabuleiro = new Tabuleiro(8,8);
@@ -64,6 +68,13 @@ public class PartidaXadrez {
 		Peca p = tabuleiro.removerPeca(origem);
 		Peca pecaCapturada = tabuleiro.removerPeca(destino);
 		tabuleiro.AlocarPeca(p, destino);
+		
+		if (pecaCapturada != null) {
+			pecasNoTabuleiro.remove(pecaCapturada);
+			pecasCapturadas.add(pecaCapturada);
+		}
+		
+		
 		return pecaCapturada;
 	}
 	
@@ -95,6 +106,7 @@ public class PartidaXadrez {
 	
 	private void alocarNovaPeca(char coluna, int linha, PecaXadrez peca) {
 		tabuleiro.AlocarPeca(peca, new PosicaoXadrez(coluna, linha).toPosition());
+		pecasNoTabuleiro.add(peca);
 	}
 	
 	private void ConfiguracaoInicial() {

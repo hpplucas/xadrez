@@ -33,6 +33,7 @@ public class UI {
 
 	
 	// https://stackoverflow.com/questions/2979383/java-clear-the-console
+	
 	public static void clearScreen() {
 	System.out.print("\033[H\033[2J");
 	System.out.flush();
@@ -52,26 +53,38 @@ public class UI {
 	}
 	
 	
+	
 	public static void MostrarTabuleiro(PecaXadrez[][] pecas) {
-
 		for (int li = 0; li < pecas.length; li++) {
 			System.out.print((8 - li) + " ");
-
 			for (int co = 0; co < pecas.length; co++) {
-				MostrarPeca(pecas[li][co]);
-
+				MostrarPeca(pecas[li][co], false);
 			}
-
 			System.out.println();
 		}
-
 		System.out.println("  a b c d e f g h");
 	}
-
 	
-	private static void MostrarPeca(PecaXadrez peca) {
+	
+	public static void MostrarTabuleiro(PecaXadrez[][] pecas, boolean[][] possibleMoves) {
+		for (int li = 0; li < pecas.length; li++) {
+			System.out.print((8 - li) + " ");
+			for (int co = 0; co < pecas.length; co++) {
+				MostrarPeca(pecas[li][co], possibleMoves[li][co]);
+			}
+			System.out.println();
+		}
+		System.out.println("  a b c d e f g h");
+	}
+	
+
+
+	private static void MostrarPeca(PecaXadrez peca, boolean background) {
+		if (background) {
+			System.out.print(ANSI_BLUE_BACKGROUND);
+		}
     	if (peca == null) {
-            System.out.print("-");
+            System.out.print("-" + ANSI_RESET);
         }
         else {
             if (peca.getCor() == Cor.BRANCO) {
@@ -83,4 +96,6 @@ public class UI {
         }
         System.out.print(" ");
 	}
+	
+
 }

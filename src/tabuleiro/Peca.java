@@ -1,6 +1,6 @@
 package tabuleiro;
 
-public class Peca {
+public abstract class Peca {
 	protected Posicao posicao;
 	private Tabuleiro tabuleiro;
 	
@@ -14,5 +14,24 @@ public class Peca {
 		return tabuleiro;
 	}
 	
+	public abstract boolean[][] movimentosPossiveis();
+	
+	public boolean movimentoPossive(Posicao posicao) {
+		return movimentosPossiveis()[posicao.getLinha()][posicao.getColuna()];
+	}
+	
+	public boolean isAlgumMovimento() {
+		
+		boolean[][] mat = movimentosPossiveis();
+		for (int li=0;li<mat.length;li++) {	
+			for (int co=0;co<mat.length;co++) {			
+				if (mat[li][co]) {
+					return true;
+				}
+			}
+		} 
+		
+		return false;
+	}
 	
 }
